@@ -162,6 +162,66 @@
       "type": "download_resource",
       "prompt": "Materialien zum Download:",
       "downloadable_resource": {"text": "Handlungsleitfaden 'Kein Platz für Missbrauch' (PDF)", "url": "/downloads/leitfaden_schutz_vor_gewalt.pdf", "fileName": "Leitfaden_Schutz_vor_Gewalt.pdf"}
+    },
+    {
+      "id": "spot_lvl3_q1",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Eine Situation im Training eskaliert schrittweise: Zuerst sind es 'harmlose' Berührungen an der Schulter, dann wiederholt an der Hüfte, dann 'zufällige' Berührungen am Gesäß. Was erkennen Sie hier?",
+      "options": [
+        {"id": "s_l3q1_a", "text": "Normales Coaching-Verhalten mit physischem Kontakt.", "score": 0, "feedback": "Nein, die zunehmende Intensität und der Fokus auf intime Körperbereiche zeigen ein Eskalationsmuster."},
+        {"id": "s_l3q1_b", "text": "Ein typisches Eskalationsmuster bei Grenzüberschreitungen.", "score": 3, "feedback": "Richtig! Die schrittweise Steigerung von unauffälligen zu eindeutig grenzüberschreitenden Berührungen ist ein klassisches Muster."},
+        {"id": "s_l3q1_c", "text": "Eine unbeabsichtigte Reihe von Missverständnissen.", "score": 0, "feedback": "Unwahrscheinlich. Die systematische Steigerung deutet auf Absicht hin, nicht auf Zufall."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q2",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Ein Teamleiter reagiert auf Beschwerden über sein Verhalten zunehmend mit: 1) Leugnen, 2) der Betroffenen die Schuld geben, 3) Drohungen gegen die Person. Was ist das?",
+      "options": [
+        {"id": "s_l3q2_a", "text": "Normaler Umgang mit Konflikten.", "score": 0, "feedback": "Nein, dies ist ein hochproblematisches Eskalationsmuster von Abwehrverhalten."},
+        {"id": "s_l3q2_b", "text": "Ein Missverständnis in der Kommunikation.", "score": 0, "feedback": "Keineswegs. Diese Eskalation von Abwehrstrategien bis hin zu Drohungen ist ein gefährliches Muster."},
+        {"id": "s_l3q2_c", "text": "DARVO - Defend, Attack, Reverse Victim and Offender.", "score": 3, "feedback": "Richtig! DARVO ist ein typisches Tätermuster: Abstreiten, Angreifen und die Opfer-Täter-Umkehr."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q3",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Eine Trainerin isoliert eine Athletin zunehmend vom Team, schafft Abhängigkeiten und unterbindet Kontakte zu anderen. Die Athletin wird immer stiller. Was geschieht hier?",
+      "options": [
+        {"id": "s_l3q3_a", "text": "Intensive Förderung eines Talents.", "score": 0, "feedback": "Nein, Isolation ist keine Förderung, sondern ein klassisches Eskalationsmuster bei Missbrauch."},
+        {"id": "s_l3q3_b", "text": "Ein fortschreitendes Muster von Kontrolle und Isolation.", "score": 3, "feedback": "Richtig! Diese Eskalation von Kontrolle und Isolation ist ein typisches Muster bei Missbrauchsbeziehungen."},
+        {"id": "s_l3q3_c", "text": "Konzentration auf die sportliche Entwicklung.", "score": 0, "feedback": "Falsch. Sportliche Entwicklung erfordert keine Isolation von Team und Umfeld."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q4",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Sie beobachten, dass ein Trainer anfängt, einen Athleten mit kleinen 'Gefallen' um Hilfe zu bitten, dann mit zunehmend größeren Forderungen kommt und später Geheimnisse verlangt. Welches Muster zeigt sich?",
+      "options": [
+        {"id": "s_l3q4_a", "text": "Aufbau einer Vertrauensbasis im Sport.", "score": 0, "feedback": "Nein, dies ist ein Manipulationsmuster, das zu Verstrickung und Abhängigkeit führt."},
+        {"id": "s_l3q4_b", "text": "Ein Eskalationsmuster mit dem Ziel der Verstrickung und Geheimhaltung.", "score": 3, "feedback": "Richtig! Dies ist ein klassisches Eskalationsmuster, bei dem Grenzen schrittweise verschoben werden."},
+        {"id": "s_l3q4_c", "text": "Delegation von Verantwortung.", "score": 0, "feedback": "Falsch. Die zunehmenden Forderungen und die Geheimhaltung deuten auf Manipulation hin."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q5",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Eine Athletin berichtet, dass ein Betreuer zuerst freundschaftliche Nachrichten schickte, dann persönlichere Fragen stellte, später Komplimente zu ihrem Körper machte und jetzt nach Treffen alleine fragt. Was ist zu erkennen?",
+      "options": [
+        {"id": "s_l3q5_a", "text": "Eine sich natürlich entwickelnde Freundschaft.", "score": 0, "feedback": "Nein, dies ist ein typisches Grooming-Eskalationsmuster mit schrittweiser Grenzverschiebung."},
+        {"id": "s_l3q5_b", "text": "Ein eskalierendes Grooming-Muster.", "score": 3, "feedback": "Richtig erkannt! Dies ist ein klares Eskalationsmuster beim Grooming: von harmlos zu immer grenzüberschreitender."},
+        {"id": "s_l3q5_c", "text": "Ein normales Interesse an der Athletin.", "score": 0, "feedback": "Falsch. Diese Eskalation überschreitet professionelle Grenzen und ist ein Warnsignal."}
+      ]
     }
   ]
 }

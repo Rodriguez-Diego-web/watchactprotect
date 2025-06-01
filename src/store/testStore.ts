@@ -32,6 +32,7 @@ interface TestState {
   result: TestResult | null;
   isLoadingQuestions: boolean;
   errorLoadingQuestions: string | null;
+  isDemoMode: boolean;
 
   // Actions
   loadQuestions: () => Promise<void>; // Fetches questions from JSON
@@ -41,6 +42,7 @@ interface TestState {
   answerQuestion: (answer: TestAnswer) => void;
   completeTest: () => void;
   resetTest: () => void;
+  clearTestData: () => void; // Completely clear all stored test data
   calculateResult: () => TestResult;
   generateShareableCard: (result: TestResult) => string;
 }
@@ -60,6 +62,7 @@ export const useTestStore = create<TestState>()(
       result: null,
       isLoadingQuestions: false,
       errorLoadingQuestions: null,
+      isDemoMode: false,
 
       // Actions
       startTest: (phase: 'spot' | 'end', level?: 1 | 2 | 3) => {
@@ -148,6 +151,12 @@ export const useTestStore = create<TestState>()(
         currentLevel: null, // Reset currentLevel as well
         // questions: [], // Optionally reset questions to empty or keep allQuestions loaded
       }),
+      
+      clearTestData: () => {
+        // Komplett alle gespeicherten Daten löschen und App neu laden
+        localStorage.removeItem('test-progress');
+        window.location.reload();
+      },
 
       loadQuestions: async () => {
         set({ isLoadingQuestions: true, errorLoadingQuestions: null });
@@ -233,17 +242,35 @@ export const useTestStore = create<TestState>()(
       generateShareableCard: (result: TestResult): string => {
         const percentage = Math.round((result.totalScore / result.maxScore) * 100);
         
-        // Generate Cloudinary URL for shareable card
-        const baseUrl = 'https://res.cloudinary.com/demo/image/upload';
-        const textOverlay = `l_text:Inter_60_bold:I%20scored%20${percentage}%25%20on%20the%20SPOT%20IT%20STOP%20IT%20test`;
-        const positioning = 'g_center,y_-50';
-        const background = 'c_fill,w_1200,h_630,b_rgb:0A1E3F';
+        // Generate data URL for a simple shareable card using SVG
+        // This creates an SVG image that works without external dependencies
+        const scoreLabel = percentage >= 80 ? 'Ausgezeichnet' : 
+                          percentage >= 60 ? 'Gut' : 
+                          percentage >= 40 ? 'Ausreichend' : 'Verbesserungsbedarf';
         
-        return `${baseUrl}/${background}/${textOverlay},${positioning}/spot-it-stop-it-card.png`;
+        // Bestimme Farbe basierend auf Ergebnis
+        const scoreColor = percentage >= 80 ? '#22C55E' : 
+                          percentage >= 60 ? '#EAB308' : 
+                          percentage >= 40 ? '#F97316' : '#EF4444';
+        
+        // Create SVG with German text
+        const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+          <rect width="1200" height="630" fill="#0A1E3F"/>
+          <text x="600" y="200" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle">ERKENNEN. STOPPEN.</text>
+          <text x="600" y="300" font-family="Arial, sans-serif" font-size="48" fill="white" text-anchor="middle">Ich habe ${percentage}% erreicht</text>
+          <text x="600" y="380" font-family="Arial, sans-serif" font-size="36" fill="${scoreColor}" text-anchor="middle">${scoreLabel}</text>
+          <text x="600" y="480" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">Teste dein Wissen zur Prävention von</text>
+          <text x="600" y="520" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">sexualisierter Gewalt im Sport</text>
+        </svg>`;
+        
+        // Convert SVG to data URL
+        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
       },
     }),
     {
       name: 'test-progress',
+      version: 1, // Increment this to force reset stored data on app update
       partialize: (state) => ({
         answers: state.answers,
         currentQuestionIndex: state.currentQuestionIndex,
