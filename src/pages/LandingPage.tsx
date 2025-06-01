@@ -10,6 +10,45 @@ import { useState, useEffect } from 'react';
 const LandingPage = () => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const quotes = [
+    {
+      text: "Jeder Athlet verdient es, seiner Leidenschaft in einer sicheren, respektvollen Umgebung ohne Belästigung und Missbrauch nachzugehen.",
+      author: "Leitbild der Kampagne"
+    },
+    {
+      text: "Prävention beginnt mit Bewusstsein. Wir müssen die Warnsignale erkennen, um sexualisierte Gewalt wirksam zu bekämpfen.",
+      author: "Deutscher Olympischer Sportbund"
+    },
+    {
+      text: "Jeder kann zum Schutz beitragen. Sprechen Sie aus, was Sie beobachten, und handeln Sie verantwortungsvoll.",
+      author: "Annika, Kampagnenleitung"
+    },
+    {
+      text: "Sichere Sportumgebungen sind kein Zufall. Sie erfordern bewusste Anstrengung, Bildung und klare Grenzen.",
+      author: "Sportpsychologischer Dienst"
+    },
+    {
+      text: "Wir können gemeinsam den Sport verändern und ein Umfeld schaffen, das Leistung und Sicherheit gleichermaßen fördert.",
+      author: "Caro, Kampagnenleitung"
+    }
+  ];
+  
+  // Wechselt das Zitat alle 5 Sekunden
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentQuoteIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToContent = () => {
     const element = document.getElementById('content');
@@ -71,7 +110,7 @@ const LandingPage = () => {
       >
       {/* Header with Logo and Navigation Menu */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 flex justify-between items-center shadow-md">
-        <img src={NewLogo} alt="Watch Act Protect Logo" className="h-10 md:h-12" /> {/* Logo on the left */}
+        <img src={NewLogo} alt="Watch Act Protect Logo" className="h-14 md:h-16" /> {/* Logo on the left */}
         
         {/* Navigation Menu Button */}
         <nav>
@@ -276,17 +315,33 @@ const LandingPage = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
-                onClick={() => navigate('/test')}
+                onClick={(e) => {
+                  // Visuelles Feedback beim Klicken
+                  const button = e.currentTarget;
+                  button.style.transform = 'scale(0.95)';
+                  setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                    navigate('/test');
+                  }, 150);
+                }}
                 size="lg"
-                className="text-lg px-8 bg-[#fcc424] hover:bg-[#fcc424]/90 text-black"
+                className="text-lg px-8 bg-[#fcc424] hover:bg-[#fcc424]/90 active:bg-[#e5b120] text-black transition-all duration-150 transform"
               >
                 Test starten
               </Button>
               <Button
-                onClick={() => navigate('/story')}
+                onClick={(e) => {
+                  // Visuelles Feedback beim Klicken
+                  const button = e.currentTarget;
+                  button.style.transform = 'scale(0.95)';
+                  setTimeout(() => {
+                    button.style.transform = 'scale(1)';
+                    navigate('/story');
+                  }, 150);
+                }}
                 variant="outline"
                 size="lg"
-                className="text-lg px-8 text-white border-white hover:bg-white/10"
+                className="text-lg px-8 text-black border-black bg-white hover:bg-white/90 active:bg-gray-200 transition-all duration-150 transform"
               >
                 Mehr erfahren
               </Button>
@@ -332,7 +387,6 @@ const LandingPage = () => {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
@@ -342,7 +396,7 @@ const LandingPage = () => {
               onClick={() => navigate('/team')}
               variant="outline"
               size="lg"
-              className="text-lg px-8 text-white border-white hover:bg-white/10"
+              className="text-lg px-8 text-black  bg-white hover:bg-yellow-500 hover:text-white"
             >
               Ganzes Team kennenlernen
             </Button>
@@ -350,24 +404,55 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Quote Section */}
-      <section className="py-16 bg-white">
+      {/* Quote Section - Dynamic Slideshow with Horizontal Animation */}
+      <section className="py-14 pb-10 bg-white"> {/* Mehr Padding am unteren Rand */}
         <div className="container mx-auto px-4">
-          <motion.blockquote
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center"
-          >
-            <p className="text-2xl md:text-3xl font-mono italic mb-6 max-w-4xl mx-auto text-gray-800">
-              "Jeder Athlet verdient es, seiner Leidenschaft in einer sicheren,
-              respektvollen Umgebung ohne Belästigung und Missbrauch nachzugehen."
-            </p>
-            <footer className="text-[#dd4d22] font-semibold">
-              — Leitbild der Kampagne
-            </footer>
-          </motion.blockquote>
+          <div className="relative overflow-hidden">
+            <div className="flex justify-center">
+              {quotes.map((quote, index) => (
+                <motion.blockquote
+                  key={index}
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{
+                    opacity: currentQuoteIndex === index ? 1 : 0,
+                    x: currentQuoteIndex === index ? 0 : index > currentQuoteIndex ? 100 : -100,
+                    position: currentQuoteIndex === index ? "relative" : "absolute",
+                  }}
+                  transition={{ duration: 0.8, ease: "easeInOut" }}
+                  className={`text-center ${currentQuoteIndex === index ? "" : "absolute top-0 left-0 right-0"} w-full`}
+                >
+                  <p className="text-2xl md:text-3xl font-mono italic mb-6 max-w-4xl mx-auto text-gray-800">
+                    "{quote.text}"
+                  </p>
+                  <footer className="text-[#dd4d22] font-semibold mb-8">
+                    — {quote.author}
+                  </footer>
+                </motion.blockquote>
+              ))}
+            </div>
+            
+            {/* Quote Navigation Dots mit verbessertem Feedback */}
+            <div className="flex justify-center gap-3 mt-8 mb-10"> {/* Mehr vertikalen Abstand */}
+              {quotes.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    // Visuelles Feedback beim Klicken
+                    const button = e.currentTarget;
+                    button.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                      button.style.transform = 'scale(1)';
+                      setCurrentQuoteIndex(index);
+                    }, 150);
+                  }}
+                  className={`w-4 h-4 rounded-full transition-all duration-300 transform hover:scale-110 ${
+                    currentQuoteIndex === index ? "bg-[#dd4d22] scale-110" : "bg-gray-300"
+                  }`}
+                  aria-label={`Zitat ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -403,14 +488,14 @@ const LandingPage = () => {
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="/story" className="hover:text-[#fcc424] transition-colors">Projektgeschichte</a></li>
                 <li><a href="/team" className="hover:text-[#fcc424] transition-colors">Unser Team</a></li>
-                <li><a href="/franchise" className="hover:text-[#fcc424] transition-colors">Franchise Kit</a></li>
+                <li><button onClick={() => navigate('/franchise-kit')} className="hover:text-[#fcc424] transition-colors">Franchise Kit</button></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Support</h4>
               <ul className="space-y-2 text-sm text-gray-400">
                 <li><a href="#" className="hover:text-[#fcc424] transition-colors">Hilfe-Center</a></li>
-                <li><a href="#" className="hover:text-[#fcc424] transition-colors">Kontakt</a></li>
+                <li><button onClick={() => navigate('/contact')} className="hover:text-[#fcc424] transition-colors">Kontakt</button></li>
                 <li><a href="#" className="hover:text-[#fcc424] transition-colors">Missbrauch melden</a></li>
               </ul>
             </div>

@@ -11,6 +11,7 @@ const ProjectStory = lazy(() => import('./pages/ProjectStory'));
 const Team = lazy(() => import('./pages/Team'));
 const FranchiseKit = lazy(() => import('./pages/FranchiseKit'));
 const WidgetApp = lazy(() => import('./pages/WidgetApp'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="/team" element={<Team />} />
             <Route path="/franchise-kit" element={<FranchiseKit />} />
             <Route path="/widget" element={<WidgetApp />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </Suspense>
       </div>
