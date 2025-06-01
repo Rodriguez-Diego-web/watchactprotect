@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { lazy, Suspense } from 'react';
 import LoadingSpinner from './components/ui/LoadingSpinner';
+import ChatBot from './components/ChatBot';
 
 // Lazy load route components for performance
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -42,6 +43,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </Suspense>
+        <ChatBot />
       </div>
     </>
   );

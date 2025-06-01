@@ -39,3 +39,6 @@ Thumbs.db
 
 # Misc
 .cache/
+
+# Local Netlify folder
+.netlify
