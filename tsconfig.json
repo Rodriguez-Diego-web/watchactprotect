@@ -29,6 +29,7 @@
     /* Testing */
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["vite.config.ts", "vite.widget.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

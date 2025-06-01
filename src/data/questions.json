@@ -1,0 +1,167 @@
+{
+  "questions": [
+    {
+      "id": "spot_lvl1_q1",
+      "phase": "spot",
+      "level": 1,
+      "type": "multiple_choice_score",
+      "prompt": "Ein Trainer macht häufig Bemerkungen über den Körper oder das Aussehen von Athlet:innen, die nichts mit der Leistung zu tun haben. Ist das angemessen?",
+      "options": [
+        {"id": "s_l1q1_a", "text": "Ja, das gehört zum Coaching dazu.", "score": 0, "feedback": "Nicht ganz. Persönliche Bemerkungen, die nicht leistungsbezogen sind, können Grenzen überschreiten."},
+        {"id": "s_l1q1_b", "text": "Nein, das ist potenziell unangemessen.", "score": 3, "feedback": "Richtig. Solche Bemerkungen können eine unangenehme Atmosphäre schaffen und sind oft unangebracht."},
+        {"id": "s_l1q1_c", "text": "Kommt auf den Ton an.", "score": 1, "feedback": "Auch wenn der Ton freundlich ist, können solche Kommentare verletzend sein und sind meist nicht zielführend."}
+      ]
+    },
+    {
+      "id": "spot_lvl1_q2",
+      "phase": "spot",
+      "level": 1,
+      "type": "multiple_choice_score",
+      "prompt": "Was versteht man unter 'Grooming' im Sportkontext?",
+      "options": [
+        {"id": "s_l1q2_a", "text": "Die Pflege der Sportausrüstung.", "score": 0, "feedback": "Das ist nicht gemeint. Grooming bezieht sich auf manipulative Verhaltensweisen."},
+        {"id": "s_l1q2_b", "text": "Das gezielte Anbahnen einer Beziehung zu einer Person, oft mit missbräuchlicher Absicht.", "score": 3, "feedback": "Genau das ist es. Täter bauen Vertrauen auf, um Grenzen zu überschreiten."},
+        {"id": "s_l1q2_c", "text": "Ein spezielles Aufwärmtraining.", "score": 0, "feedback": "Nein, Grooming ist eine ernste Form der Manipulation."}
+      ]
+    },
+    {
+      "id": "spot_lvl1_q3",
+      "phase": "spot",
+      "level": 1,
+      "type": "multiple_choice_score",
+      "prompt": "Ein:e Teamkolleg:in erzählt dir, dass sie sich in Gegenwart einer bestimmten Betreuungsperson unwohl fühlt. Wie reagierst du?",
+      "options": [
+        {"id": "s_l1q3_a", "text": "Ich sage, sie soll sich nicht so anstellen.", "score": 0, "feedback": "Das ist nicht hilfreich. Es ist wichtig, solche Gefühle ernst zu nehmen."},
+        {"id": "s_l1q3_b", "text": "Ich höre zu und frage, ob ich helfen kann.", "score": 3, "feedback": "Sehr gut. Zuhören und Unterstützung anbieten ist der richtige erste Schritt."},
+        {"id": "s_l1q3_c", "text": "Ich ignoriere es, das geht mich nichts an.", "score": 0, "feedback": "Wegschauen hilft niemandem. Zivilcourage ist wichtig."}
+      ]
+    },
+    {
+      "id": "spot_lvl2_q1",
+      "phase": "spot",
+      "level": 2,
+      "type": "multiple_choice_score",
+      "prompt": "Eine Trainerin bevorzugt eine Athletin auffällig, macht ihr Geschenke und bittet sie um private Treffen außerhalb des Trainings. Was könnte das sein?",
+      "options": [
+        {"id": "s_l2q1_a", "text": "Besondere Förderung eines Talents.", "score": 1, "feedback": "Obwohl Förderung wichtig ist, können solche Verhaltensweisen auch Anzeichen für Grooming sein."},
+        {"id": "s_l2q1_b", "text": "Ein Anzeichen für Grooming und Grenzüberschreitung.", "score": 3, "feedback": "Richtig. Ungleiche Behandlung, Geschenke und private Treffen sind typische Warnsignale."},
+        {"id": "s_l2q1_c", "text": "Einfach eine sehr engagierte Trainerin.", "score": 0, "feedback": "Engagement ist gut, aber dieses Verhalten überschreitet professionelle Grenzen."}
+      ]
+    },
+    {
+      "id": "spot_lvl2_q2",
+      "phase": "spot",
+      "level": 2,
+      "type": "multiple_choice_score",
+      "prompt": "Ein Betreuer sagt zu einem Athleten: 'Das bleibt unser Geheimnis, oder? Wenn das rauskommt, schadet das deiner Karriere.' Was ist das für eine Taktik?",
+      "options": [
+        {"id": "s_l2q2_a", "text": "Vertrauensbildung.", "score": 0, "feedback": "Nein, das ist eine typische Einschüchterungs- und Schweige-Taktik."},
+        {"id": "s_l2q2_b", "text": "Eine Drohung und der Versuch, Schweigen zu erzwingen.", "score": 3, "feedback": "Korrekt. Täter nutzen oft Drohungen, um ihre Opfer zum Schweigen zu bringen."},
+        {"id": "s_l2q2_c", "text": "Ein gut gemeinter Ratschlag.", "score": 0, "feedback": "Das ist kein Ratschlag, sondern Manipulation."}
+      ]
+    },
+    {
+      "id": "spot_lvl2_q3",
+      "phase": "spot",
+      "level": 2,
+      "type": "multiple_choice_score",
+      "prompt": "Ein Physiotherapeut behandelt Athlet:innen oft bei geschlossener Tür ohne Anwesenheit einer dritten Person, obwohl dies gegen die Vereinsrichtlinien verstößt. Ist das problematisch?",
+      "options": [
+        {"id": "s_l2q3_a", "text": "Nein, das schafft eine vertrauliche Atmosphäre.", "score": 0, "feedback": "Das Ignorieren von Schutzrichtlinien wie dem Vier-Augen-Prinzip ist ein Risikofaktor."},
+        {"id": "s_l2q3_b", "text": "Ja, das untergräbt Schutzmaßnahmen und erhöht Risiken.", "score": 3, "feedback": "Richtig. Richtlinien wie das Vier-Augen-Prinzip dienen dem Schutz aller Beteiligten."},
+        {"id": "s_l2q3_c", "text": "Das ist nur eine kleine Regelüberschreitung.", "score": 1, "feedback": "Auch kleine Regelüberschreitungen können problematisch sein, wenn sie Schutzmechanismen aushebeln."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q1",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Ein Trainer, der anfangs nur 'harmlose' Witze machte, beginnt Athlet:innen anzufassen, zuerst 'zufällig', dann gezielter. Wie nennt man so eine Entwicklung?",
+      "options": [
+        {"id": "s_l3q1_a", "text": "Langsame Gewöhnung.", "score": 1, "feedback": "Man könnte es so nennen, aber der Fachbegriff ist präziser."},
+        {"id": "s_l3q1_b", "text": "Eskalation von grenzüberschreitendem Verhalten.", "score": 3, "feedback": "Genau. Täter testen oft Grenzen und steigern ihr Verhalten schrittweise."},
+        {"id": "s_l3q1_c", "text": "Ungeschicklichkeit.", "score": 0, "feedback": "Das ist eine Verharmlosung. Hier steckt meist eine Absicht dahinter."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q2",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Eine Betreuerin isoliert eine junge Athletin zunehmend vom Team, kontrolliert ihre sozialen Kontakte und macht sie emotional von sich abhängig. Was ist das?",
+      "options": [
+        {"id": "s_l3q2_a", "text": "Intensive persönliche Betreuung.", "score": 0, "feedback": "Nein, das sind klare Anzeichen von emotionalem Missbrauch und Isolationstaktiken."},
+        {"id": "s_l3q2_b", "text": "Eine Form von psychischer Gewalt und Kontrolle.", "score": 3, "feedback": "Richtig. Isolation und emotionale Abhängigkeit sind ernste Formen psychischer Gewalt."},
+        {"id": "s_l3q2_c", "text": "Ein Zeichen von großer Fürsorge.", "score": 0, "feedback": "Kontrollierendes Verhalten ist keine Fürsorge, sondern übergriffig."}
+      ]
+    },
+    {
+      "id": "spot_lvl3_q3",
+      "phase": "spot",
+      "level": 3,
+      "type": "multiple_choice_score",
+      "prompt": "Täter sexualisierter Gewalt im Sport nutzen oft ihre Machtposition aus. Welche der folgenden Aussagen ist FALSCH?",
+      "options": [
+        {"id": "s_l3q3_a", "text": "Sie schaffen Abhängigkeitsverhältnisse.", "score": 0, "feedback": "Das ist eine typische Täterstrategie."},
+        {"id": "s_l3q3_b", "text": "Sie suchen sich gezielt Opfer aus, die leicht manipulierbar erscheinen.", "score": 0, "feedback": "Auch das ist leider oft der Fall."},
+        {"id": "s_l3q3_c", "text": "Sie handeln meist impulsiv und ohne Planung.", "score": 3, "feedback": "Das ist falsch. Täter gehen oft sehr planvoll und strategisch vor."}
+      ]
+    },
+    {
+      "id": "end_q1_mc_action",
+      "phase": "end",
+      "type": "multiple_choice_action",
+      "prompt": "Du beobachtest, wie ein:e Trainer:in eine:n Athlet:in vor dem gesamten Team wiederholt demütigt und anschreit. Was ist eine angemessene erste Reaktion von dir als Teammitglied (wenn du dich sicher fühlst)?",
+      "options": [
+        {"id": "e_q1_a", "text": "Wegschauen und hoffen, dass es bald aufhört.", "score": 0, "consequence_feedback": "Wegschauen kann die Situation für die betroffene Person verschlimmern und signalisiert Zustimmung.", "feedback": "Passives Verhalten kann schädlich sein."}, 
+        {"id": "e_q1_b", "text": "Die/den Trainer:in direkt unterbrechen und sagen, dass das nicht in Ordnung ist.", "score": 2, "consequence_feedback": "Direkte Konfrontation kann riskant sein, aber auch wirksam. Es hängt von der Situation und deiner Sicherheit ab.", "feedback": "Kann richtig sein, birgt aber Risiken."}, 
+        {"id": "e_q1_c", "text": "Die/den betroffene:n Athlet:in nach dem Training ansprechen und Unterstützung anbieten.", "score": 3, "consequence_feedback": "Unterstützung zeigen ist sehr wichtig. Zusätzlich solltest du den Vorfall melden.", "feedback": "Ein wichtiger Schritt, aber nicht der einzige."}
+      ]
+    },
+    {
+      "id": "end_q2_mc_action",
+      "phase": "end",
+      "type": "multiple_choice_action",
+      "prompt": "Ein:e Athlet:in vertraut sich dir an und berichtet von sexueller Belästigung durch eine Betreuungsperson. Was solltest du NICHT tun?",
+      "options": [
+        {"id": "e_q2_a", "text": "Der Person glauben und ihr für ihr Vertrauen danken.", "score": 0, "consequence_feedback": "Das ist eine wichtige erste Reaktion.", "feedback": "Das ist richtiges Verhalten."}, 
+        {"id": "e_q2_b", "text": "Versprechen, alles geheim zu halten.", "score": 3, "consequence_feedback": "Genau das solltest du nicht tun. Du hast eine Meldepflicht, wenn Gefahr besteht.", "feedback": "Niemals absolute Geheimhaltung versprechen!"}, 
+        {"id": "e_q2_c", "text": "Fragen, ob die Person möchte, dass du ihr bei der Meldung hilfst.", "score": 0, "consequence_feedback": "Unterstützung bei der Meldung anzubieten ist sehr hilfreich.", "feedback": "Das ist ein guter unterstützender Schritt."}
+      ]
+    },
+    {
+      "id": "end_q3_info_guide",
+      "phase": "end",
+      "type": "information_guide",
+      "prompt": "Handlungsleitfaden: Was tun bei Verdacht auf sexualisierte Gewalt?",
+      "step_by_step_guide": [
+        "1. Ruhe bewahren und der betroffenen Person glauben.",
+        "2. Zuhören, ohne zu werten oder viele Detailfragen zu stellen.",
+        "3. Sicherheit der betroffenen Person gewährleisten (ggf. aus der Situation entfernen).",
+        "4. Eigene Beobachtungen und das Gehörte (mit Datum und Uhrzeit) dokumentieren.",
+        "5. Vorfall bei der zuständigen Ansprechperson im Verein/Verband oder einer externen Beratungsstelle melden.",
+        "6. Keine Alleingänge – suche dir Unterstützung."
+      ]
+    },
+    {
+      "id": "end_q4_info_contacts",
+      "phase": "end",
+      "type": "information_contacts",
+      "prompt": "Wichtige Anlaufstellen und Kontakte:",
+      "emergency_contacts": [
+        {"name": "Hilfetelefon Sexueller Missbrauch", "details": "0800 22 55 530 (kostenfrei & anonym)", "url": "https://www.hilfe-portal-missbrauch.de/hilfe-telefon"},
+        {"name": "Nummer gegen Kummer (für Kinder & Jugendliche)", "details": "116 111 (kostenfrei & anonym)", "url": "https://www.nummergegenkummer.de"},
+        {"name": "Anlaufstelle Unabhängige:r Beauftragte:r für Fragen des sexuellen Kindesmissbrauchs (UBSKM)", "details": "Informationen und Beratung", "url": "https://www.hilfe-portal-missbrauch.de"},
+        {"name": "Lokale Sportjugend oder Landessportbund", "details": "Haben oft eigene Ansprechpersonen für Prävention und Intervention."}
+      ]
+    },
+    {
+      "id": "end_q5_download",
+      "phase": "end",
+      "type": "download_resource",
+      "prompt": "Materialien zum Download:",
+      "downloadable_resource": {"text": "Handlungsleitfaden 'Kein Platz für Missbrauch' (PDF)", "url": "/downloads/leitfaden_schutz_vor_gewalt.pdf", "fileName": "Leitfaden_Schutz_vor_Gewalt.pdf"}
+    }
+  ]
+}

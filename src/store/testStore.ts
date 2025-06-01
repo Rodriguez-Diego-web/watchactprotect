@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Question as TestQuestion, Option as QuestionOption, EmergencyContact, DownloadableResource, QuestionType } from '../types/test';
+import type { Question as TestQuestion } from '../types/test';
 
 // Types TestAnswer and TestResult remain locally defined as they are specific to the store's state.
 // Other types (TestQuestion, QuestionOption, EmergencyContact, DownloadableResource, QuestionType) are now imported from ../types/test.

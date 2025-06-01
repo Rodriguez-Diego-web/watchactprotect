@@ -126,7 +126,7 @@ const ResultPage = () => {
 
                 <div className="text-center p-6 bg-gray-50 rounded-lg">
                   <div className="text-2xl font-bold text-navy mb-2">
-                    {result.stopScore}
+                    {result.endScore}
                   </div>
                   <div className="text-sm text-gray-600 font-medium">
                     STOPPEN Punktzahl

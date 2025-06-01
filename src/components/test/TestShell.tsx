@@ -5,7 +5,9 @@ import { useTestStore } from '@/store/testStore';
 import { Button } from '@/components/ui/Button';
 import { Progress } from '@/components/ui/Progress';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
+import InformationGuideDisplay from './questiontypes/InformationGuideDisplay';
+import EmergencyContactsDisplay from './questiontypes/EmergencyContactsDisplay';
+import DownloadResourceDisplay from './questiontypes/DownloadResourceDisplay';
 
 interface TestShellProps {
   embedded?: boolean;
@@ -31,7 +33,6 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
   } = useTestStore();
 
   const [selectedOption, setSelectedOption] = useState<string>('');
-  const [showLevelSelection, setShowLevelSelection] = useState<boolean>(false);
 
   useEffect(() => {
     // Only call loadQuestions if allQuestions is empty to avoid redundant fetches
@@ -96,85 +97,45 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
     return <div className="text-center p-10 text-red-600">Fehler beim Laden der Fragen: {errorLoadingQuestions}</div>;
   }
 
-  // If not started, and not loading/error, show start screen
-  // This part might need adjustment if TestShell is meant to show a phase selection first
+  // Wenn der Test nicht gestartet ist, zeigen wir die Level-Auswahl
   if (!isTestStarted) {
-    if (showLevelSelection) {
-      // Display Level Selection UI for 'spot' phase
-      return (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto text-center"
-        >
-          <h2 className="text-3xl font-bold text-navy mb-4">Erkennungstest - Level wählen</h2>
-          <p className="text-lg text-gray-600 mb-8">Wähle den Schwierigkeitsgrad für den Erkennungstest.</p>
-          <div className="flex flex-col items-center gap-4">
-            <Button
-              onClick={() => { startTest('spot', 1); setShowLevelSelection(false); }}
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-4 w-full max-w-xs"
-            >
-              Level 1: Grundlagen-Sensibilisierung
-            </Button>
-            <Button
-              onClick={() => { startTest('spot', 2); setShowLevelSelection(false); }}
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-4 w-full max-w-xs"
-            >
-              Level 2: Manipulation erkennen
-            </Button>
-            <Button
-              onClick={() => { startTest('spot', 3); setShowLevelSelection(false); }}
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-4 w-full max-w-xs"
-            >
-              Level 3: Eskalationsmuster erkennen
-            </Button>
-            <Button
-              onClick={() => setShowLevelSelection(false)} // Go back to phase selection
-              variant="ghost"
-              size="sm"
-              className="mt-4 text-gray-600"
-            >
-              Zurück zur Testauswahl
-            </Button>
-          </div>
-        </motion.div>
-      );
+    if (isLoadingQuestions) {
+      return <div className="text-center p-10">Fragen werden geladen...</div>;
     }
-    // Display Initial Phase Selection UI
+    
+    // Zeige direkt die Level-Auswahl
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="max-w-2xl mx-auto text-center"
       >
-        <h2 className="text-3xl font-bold text-navy mb-6">
-          Wähle einen Testbereich
-        </h2>
-        <p className="text-lg text-gray-600 mb-8">
-          Teste dein Wissen und lerne, wie du sexualisierte Gewalt im Sport erkennen und aktiv dagegen vorgehen kannst. Wähle einen der beiden Bereiche, um zu starten.
-        </p>
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
+        <h2 className="text-3xl font-bold text-navy mb-4">Wähle einen Schwierigkeitsgrad</h2>
+        <p className="text-lg text-gray-600 mb-8">Wähle den Level, mit dem du beginnen möchtest.</p>
+        <div className="flex flex-col items-center gap-4">
           <Button
-            onClick={() => setShowLevelSelection(true)} // Show level selection for 'spot'
-            variant="cta"
+            onClick={() => startTest('spot', 1)}
+            variant="outline"
             size="lg"
-            className="text-lg px-8 py-4 w-full sm:w-auto"
+            className="text-lg px-8 py-4 w-full max-w-xs"
           >
-            ERKENNEN Test (SEE IT)
+            Level 1: Grundlagen-Sensibilisierung
           </Button>
           <Button
-            onClick={() => startTest('end')} // Directly start 'end' phase
-            variant="cta"
+            onClick={() => startTest('spot', 2)}
+            variant="outline"
             size="lg"
-            className="text-lg px-8 py-4 w-full sm:w-auto"
+            className="text-lg px-8 py-4 w-full max-w-xs"
           >
-            STOPPEN Test (END IT)
+            Level 2: Manipulation erkennen
+          </Button>
+          <Button
+            onClick={() => startTest('spot', 3)}
+            variant="outline"
+            size="lg"
+            className="text-lg px-8 py-4 w-full max-w-xs"
+          >
+            Level 3: Eskalationsmuster erkennen
           </Button>
         </div>
       </motion.div>
@@ -234,51 +195,61 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentQuestion.id}
-          initial={{ opacity: 0, x: 20 }}
+          initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
+          exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.3 }}
-          className="bg-white rounded-lg shadow-lg p-8 mb-8"
+          className="w-full"
         >
-          <h3 className="text-xl font-semibold text-navy mb-6">
-            {currentQuestion.prompt}
-          </h3>
-
-          <div className="space-y-4">
-            {currentQuestion.options && currentQuestion.options.map((option) => (
-              <label
-                key={option.id}
-                className={`block p-4 rounded-lg border-2 cursor-pointer transition-all hover:border-orange/50 ${
-                  selectedOption === option.id
-                    ? 'border-orange bg-orange/10'
-                    : 'border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                <input
-                  type="radio"
-                  name={`question-${currentQuestion.id}`}
-                  value={option.id}
-                  checked={selectedOption === option.id}
-                  onChange={() => handleOptionSelect(option.id)}
-                  className="sr-only"
-                />
-                <div className="flex items-center">
-                  <div
-                    className={`w-4 h-4 rounded-full border-2 mr-3 ${
-                      selectedOption === option.id
-                        ? 'border-orange bg-orange'
-                        : 'border-gray-300'
-                    }`}
-                  >
-                    {selectedOption === option.id && (
-                      <div className="w-2 h-2 bg-white rounded-full m-0.5" />
+          {(() => {
+            switch (currentQuestion.type) {
+              case 'multiple_choice_score':
+              case 'multiple_choice_action':
+                return (
+                  <>
+                    <h2 className="text-2xl sm:text-3xl font-semibold text-navy mb-6 sm:mb-8 leading-tight">
+                      {currentQuestion.prompt}
+                    </h2>
+                    <div className="space-y-3 sm:space-y-4">
+                      {currentQuestion.options?.map((option) => (
+                        <motion.div
+                          key={option.id}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <Button
+                            variant={selectedOption === option.id ? 'cta' : 'outline'}
+                            size="lg"
+                            onClick={() => handleOptionSelect(option.id)}
+                            className={`w-full text-left justify-start h-auto py-3 sm:py-4 px-4 sm:px-6 text-base sm:text-lg whitespace-normal break-words ${selectedOption === option.id ? 'ring-2 ring-orange ring-offset-2' : ''
+                              }`}
+                          >
+                            {option.text}
+                          </Button>
+                        </motion.div>
+                      ))}
+                    </div>
+                    {selectedOption && currentQuestion.options?.find(opt => opt.id === selectedOption)?.feedback && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-4 p-3 sm:p-4 bg-sky-100 border border-sky-300 rounded-md text-sky-800 text-sm sm:text-base"
+                      >
+                        {currentQuestion.options?.find(opt => opt.id === selectedOption)?.feedback}
+                      </motion.div>
                     )}
-                  </div>
-                  <span className="text-gray-900">{option.text}</span>
-                </div>
-              </label>
-            ))}
-          </div>
+                  </>
+                );
+              case 'information_guide':
+                return <InformationGuideDisplay question={currentQuestion} />;
+              case 'information_contacts':
+                return <EmergencyContactsDisplay question={currentQuestion} />;
+              case 'download_resource':
+                return <DownloadResourceDisplay question={currentQuestion} />;
+              default:
+                return <p className="text-red-500">Unbekannter Fragetyp: {currentQuestion.type}</p>;
+            }
+          })()}
         </motion.div>
       </AnimatePresence>
 
