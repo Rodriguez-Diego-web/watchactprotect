@@ -169,10 +169,10 @@ const LandingPage = () => {
       <section 
         className="min-h-screen text-white flex flex-col justify-center items-center relative overflow-hidden p-4 md:p-8"
         style={{
-          background: `linear-gradient(135deg, 
-            #fcc424 0%, #fcc424 33.33%, 
-            #dd4d22 33.33%, #dd4d22 66.66%, 
-            #1e8b88 66.66%, #1e8b88 100%)`
+          background: `linear-gradient(169deg, 
+            #fcc424 0%, #fcc424 33%, 
+            #dd4d22 33%, #dd4d22 66%, 
+            #1e8b88 66%, #1e8b88 100%)`
         }}
       >
       {/* Header with Logo and Navigation Menu */}
@@ -250,9 +250,9 @@ const LandingPage = () => {
             className="max-w-4xl mx-auto"
           >
                       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight tracking-tight pt-16 md:pt-20" style={{textShadow: '2px 2px 4px rgba(0,0,0,0.3)'}}>
-            <span className="block">ERKENNEN.</span>
-            <span className="block">HANDELN.</span>
-            <span className="block">SCHÜTZEN.</span>
+            <span className="block">WATCH.</span>
+            <span className="block">ACT.</span>
+            <span className="block">PROTECT.</span>
           </h1>
             <p className="text-lg sm:text-xl md:text-2xl mb-10 max-w-2xl mx-auto" style={{textShadow: '1px 1px 3px rgba(0,0,0,0.3)'}}>
             Gemeinsam gegen sexualisierte Gewalt im Sport. Starte jetzt den interaktiven Test und lerne, wie du helfen kannst.
@@ -360,7 +360,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 500 }}
               >
-                SPOT IT
+                WATCH
               </motion.h3>
               <motion.p 
                 className="text-gray-600"
@@ -404,7 +404,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 500 }}
               >
-                STOP IT
+                ACT
               </motion.h3>
               <motion.p 
                 className="text-gray-600"
@@ -448,7 +448,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 500 }}
               >
-                SHARE IT
+               PROTECT
               </motion.h3>
               <motion.p 
                 className="text-gray-600"
