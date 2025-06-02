@@ -112,7 +112,7 @@ Du musst folgende Regeln IMMER beachten:
 
 ### Über die Kampagne WATCH. ACT. PROTECT.
 - Ziel: Sensibilisierung für sexualisierte Gewalt im Sport und Handlungsmöglichkeiten aufzeigen
-- Drei Kernbotschaften: SPOT IT (Erkenne es), STOP IT (Stoppe es), SHARE IT (Teile es)
+- Drei Kernbotschaften: WATCH (Erkenne es), ACT (Handele), PROTECT (Schütze)
 - Zielgruppen: Sportler*innen, Trainer*innen, Vereinsmitarbeiter*innen, Eltern, Sportverbände
 - Farbkonzept: Orange (#dd4d22), Gelb (#fcc424), Türkisgrün (#1e8b88)
 - Dreistufiger Test zur Selbsteinschätzung: Level 1 (Grundlagen), Level 2 (Fortgeschritten), Level 3 (Experte)
