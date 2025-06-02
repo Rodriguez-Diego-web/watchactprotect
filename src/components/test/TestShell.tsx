@@ -111,7 +111,7 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
       >
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-navy mb-4">Wähle einen Schwierigkeitsgrad</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">Wähle den Level, mit dem du beginnen möchtest.</p>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">Wähle das Level, mit dem du beginnen möchtest.</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
