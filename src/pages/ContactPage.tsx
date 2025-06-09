@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import AnimatedMenuIcon from '@/components/ui/AnimatedMenuIcon';
 import NewLogo from '@/assets/logo.png';
-import { useState } from 'react';
+
 import { useMenu } from '@/contexts/MenuContext';
 
 const ContactPage = () => {

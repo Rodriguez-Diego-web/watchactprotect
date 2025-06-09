@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, MessageCircle, FileText } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { useBottomNavigation } from '../../hooks/useBottomNavigation';
 import { useMenu } from '../../contexts/MenuContext';
 
 interface NavItem {
@@ -90,7 +89,7 @@ const BottomNavigation = () => {
       <div className="bg-gray-600/30 backdrop-blur-xl rounded-full shadow-2xl px-4 py-3">
         
         <div className="flex items-center gap-3 relative">
-          {navItems.map((item, index) => {
+          {navItems.map((item) => {
             const isActive = activeTab === item.id;
             
             return (
