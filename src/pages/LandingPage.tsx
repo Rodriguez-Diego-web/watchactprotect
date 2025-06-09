@@ -6,6 +6,7 @@ import { Play, ChevronDown, Shield, Users, Target } from 'lucide-react'; // Remo
 import AnimatedMenuIcon from '@/components/ui/AnimatedMenuIcon';
 import NewLogo from '@/assets/logo.png'; // Import the new logo
 import { useState, useEffect } from 'react';
+import { useMenu } from '@/contexts/MenuContext';
 
 // Animierte Textkomponente mit Schreibmaschineneffekt
 interface TypewriterProps {
@@ -76,7 +77,7 @@ const TypewriterText: React.FC<TypewriterProps> = ({
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
   const [currentQuoteIndex, setCurrentQuoteIndex] = useState(0);
 
   useEffect(() => {
@@ -176,7 +177,7 @@ const LandingPage = () => {
         }}
       >
       {/* Header with Logo and Navigation Menu */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 flex justify-between items-center shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 flex justify-between items-center" style={{ paddingTop: `calc(1rem + env(safe-area-inset-top, 0px))` }}>
         <img src={NewLogo} alt="Watch Act Protect Logo" className="h-14 md:h-16" /> {/* Logo on the left */}
         
         {/* Navigation Menu Button */}
@@ -282,19 +283,21 @@ const LandingPage = () => {
         </div>
 
         {/* Scroll indicator */}
-        <motion.button
-          onClick={scrollToContent}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/70 hover:text-white transition-colors"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          aria-label="Scroll to content"
-        >
-          <ChevronDown className="w-8 h-8" />
-        </motion.button>
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+          <motion.button
+            onClick={scrollToContent}
+            className="text-white/70 hover:text-white transition-colors flex items-center justify-center"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            aria-label="Scroll to content"
+          >
+            <ChevronDown className="w-8 h-8" />
+          </motion.button>
+        </div>
       </section>
 
       {/* Content Section */}
-      <section id="content" className="py-20 bg-white">
+      <section id="content" className="py-20 bg-black relative overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -303,260 +306,202 @@ const LandingPage = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold text-gray-800 mb-8">
-              <TypewriterText 
-                text="Sichere Räume im Sport schaffen" 
-                delay={0.3}
-                speed={0.04}
-                className="bg-gradient-to-r from-[#fcc424] via-[#dd4d22] to-[#1e8b88] inline-block text-transparent bg-clip-text"
-              />
+            <h2 className="text-4xl font-bold text-white mb-8 leading-tight">
+              <span className="bg-gradient-to-r from-[#fcc424] via-[#dd4d22] to-[#1e8b88] text-transparent bg-clip-text block">
+                <TypewriterText 
+                  text="Sichere Räume" 
+                  delay={0.1}
+                  speed={0.06}
+                  className=""
+                />
+              </span>
+              <span className="bg-gradient-to-r from-[#fcc424] via-[#dd4d22] to-[#1e8b88] text-transparent bg-clip-text block">
+                <TypewriterText 
+                  text="im Sport schaffen" 
+                  delay={1.2}
+                  speed={0.06}
+                  className=""
+                />
+              </span>
             </h2>
             <motion.p 
-              className="text-xl text-gray-600 max-w-3xl mx-auto relative overflow-hidden"
+              className="text-xl text-gray-300 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: 1.5, duration: 1 }}
+              transition={{ delay: 0.8, duration: 1 }}
               viewport={{ once: true }}
             >
-              <motion.span 
-                initial={{ width: "100%" }} 
-                whileInView={{ width: 0 }}
-                transition={{ delay: 1.5, duration: 1, ease: "easeInOut" }}
-                className="absolute top-0 right-0 h-full bg-white z-10"
-                style={{ originX: 1 }}
-                viewport={{ once: true }}
-              />
-              Unser interaktiver Test hilft dir, die Warnsignale von 
-              sexualisierter Gewalt zu verstehen und bietet praktische Interventionsmöglichkeiten.
+              Lerne Warnsignale zu erkennen und praktische Interventionsstrategien.
             </motion.p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
-            {/* SPOT IT-Karte mit verbesserten Animationen */}
+          <div className="grid md:grid-cols-3 gap-0 mb-16">
+            {/* WATCH-Karte - harte Kanten, blockig */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(252, 196, 36, 0.3)" }}
-              className="text-center p-6 rounded-xl hover:bg-white/90 transition-all cursor-pointer"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative group cursor-pointer"
             >
-              <motion.div 
-                className="w-20 h-20 bg-[#fcc424]/20 rounded-full flex items-center justify-center mx-auto mb-6"
-                initial={{ rotate: -10 }}
-                whileInView={{ rotate: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ scale: 1.1, backgroundColor: "rgba(252, 196, 36, 0.3)" }}
-              >
-                <motion.div
-                  whileHover={{ rotate: 15 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Target className="w-10 h-10 text-[#fcc424]" />
-                </motion.div>
-              </motion.div>
-              <motion.h3 
-                className="text-2xl font-bold text-[#fcc424] mb-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 500 }}
-              >
-                WATCH
-              </motion.h3>
-              <motion.p 
-                className="text-gray-600"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                Lerne, Warnsignale und unangemessenes Verhalten zu erkennen, 
-                die auf sexualisierte Gewalt im Sportumfeld hindeuten können.
-              </motion.p>
+              <div className="bg-[#fcc424] p-8 transform skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                <div className="transform -skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                  <Target className="w-12 h-12 text-black mb-4" />
+                  <h3 className="text-3xl font-black text-black mb-4 tracking-wider">
+                    WATCH
+                  </h3>
+                  <p className="text-black/80 font-medium leading-tight">
+                    Warnsignale erkennen und verstehen
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
-            {/* STOP IT-Karte mit verbesserten Animationen */}
+            {/* ACT-Karte - harte Kanten, blockig */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(221, 77, 34, 0.3)" }}
-              className="text-center p-6 rounded-xl hover:bg-white/90 transition-all cursor-pointer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative group cursor-pointer"
             >
-              <motion.div 
-                className="w-20 h-20 bg-[#dd4d22]/20 rounded-full flex items-center justify-center mx-auto mb-6"
-                initial={{ scale: 0.8 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
-                whileHover={{ scale: 1.1, backgroundColor: "rgba(221, 77, 34, 0.3)" }}
-              >
-                <motion.div
-                  whileHover={{ scale: 1.2, rotate: -10, transition: { duration: 0.2 } }}
-                  animate={{ 
-                    scale: [1, 1.05, 1],
-                    transition: { repeat: Infinity, repeatDelay: 4, duration: 1.5 }
-                  }}
-                >
-                  <Shield className="w-10 h-10 text-[#dd4d22]" />
-                </motion.div>
-              </motion.div>
-              <motion.h3 
-                className="text-2xl font-bold text-[#dd4d22] mb-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 500 }}
-              >
-                ACT
-              </motion.h3>
-              <motion.p 
-                className="text-gray-600"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Entdecke praktische Strategien für sichere Intervention und 
-                Unterstützung von Betroffenen bei der Schaffung schützender Umgebungen.
-              </motion.p>
+              <div className="bg-[#dd4d22] p-8 transform -skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                <div className="transform skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                  <Shield className="w-12 h-12 text-white mb-4" />
+                  <h3 className="text-3xl font-black text-white mb-4 tracking-wider">
+                    ACT
+                  </h3>
+                  <p className="text-white/90 font-medium leading-tight">
+                    Praktische Interventionsstrategien
+                  </p>
+                </div>
+              </div>
             </motion.div>
 
-            {/* SHARE IT-Karte mit verbesserten Animationen */}
+            {/* PROTECT-Karte - harte Kanten, blockig */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 100 }}
-              viewport={{ once: true, margin: "-50px" }}
-              whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(30, 139, 136, 0.3)" }}
-              className="text-center p-6 rounded-xl hover:bg-white/90 transition-all cursor-pointer"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="relative group cursor-pointer"
             >
-              <motion.div 
-                className="w-20 h-20 bg-[#1e8b88]/20 rounded-full flex items-center justify-center mx-auto mb-6"
-                initial={{ scale: 0.8, rotate: 10 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                whileHover={{ scale: 1.1, backgroundColor: "rgba(30, 139, 136, 0.3)" }}
-              >
-                <motion.div
-                  animate={{ 
-                    rotate: [0, 5, 0, -5, 0],
-                    transition: { repeat: Infinity, repeatDelay: 3, duration: 2.5, ease: "easeInOut" }
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <Users className="w-10 h-10 text-[#1e8b88]" />
-                </motion.div>
-              </motion.div>
-              <motion.h3 
-                className="text-2xl font-bold text-[#1e8b88] mb-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 500 }}
-              >
-               PROTECT
-              </motion.h3>
-              <motion.p 
-                className="text-gray-600"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-              >
-                Teile deine Ergebnisse und hilf dabei, das Bewusstsein zu schärfen, um 
-                sicherere Sportumgebungen für alle zu schaffen.
-              </motion.p>
+              <div className="bg-[#1e8b88] p-8 transform skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                <div className="transform -skew-x-3 group-hover:skew-x-0 transition-transform duration-300">
+                  <Users className="w-12 h-12 text-white mb-4" />
+                  <h3 className="text-3xl font-black text-white mb-4 tracking-wider">
+                    PROTECT
+                  </h3>
+                  <p className="text-white/90 font-medium leading-tight">
+                    Sichere Räume schaffen
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </div>
 
-          {/* CTA Section */}
+          {/* CTA Section - angeschrägt */}
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.97 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, type: "spring", stiffness: 60 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="text-center bg-gradient-to-br from-[#1e8b88] to-[#17706d] rounded-2xl p-12 shadow-xl relative overflow-hidden"
+            className="relative overflow-hidden"
           >
-            {/* Animierter Hintergrund-Effekt */}
-            <motion.div 
-              className="absolute -top-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"
-              animate={{ 
-                x: [0, 40, 0], 
-                y: [0, 30, 0],
-                opacity: [0.5, 0.8, 0.5]
+            <div 
+              className="bg-[#1e8b88] py-16 px-12 text-center relative"
+              style={{
+                clipPath: 'polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)'
               }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 8, 
-                ease: "easeInOut" 
-              }}
-            />
-            <motion.div 
-              className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"
-              animate={{ 
-                x: [0, -30, 0], 
-                y: [0, -40, 0],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{ 
-                repeat: Infinity, 
-                duration: 10, 
-                ease: "easeInOut" 
-              }}
-            />
-            
-            <h3 className="text-3xl font-bold text-white mb-6 relative z-10">
-              <TypewriterText 
-                text="Bereit, etwas zu verändern?" 
-                delay={0.4}
-                speed={0.05}
-                className="relative"
+            >
+              {/* Animierter Hintergrund-Effekt */}
+              <motion.div 
+                className="absolute -top-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"
+                animate={{ 
+                  x: [0, 40, 0], 
+                  y: [0, 30, 0],
+                  opacity: [0.5, 0.8, 0.5]
+                }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 8, 
+                  ease: "easeInOut" 
+                }}
               />
-            </h3>
-            <motion.p 
-              className="text-lg text-white/90 mb-8 max-w-2xl mx-auto relative z-10"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              Schließe dich tausenden Athleten, Trainern und Sportprofis an, 
-              die daran arbeiten, sexualisierte Gewalt aus dem Sport zu eliminieren.
-            </motion.p>
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 justify-center relative z-10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  onClick={() => navigate('/test')}
-                  size="lg"
-                  className="text-lg px-8 bg-[#fcc424] hover:bg-[#fcc424]/90 active:bg-[#e5b120] text-black transition-all duration-200 shadow-lg"
-                >
-                  <motion.span
-                    animate={{ x: [0, 3, 0] }}
-                    transition={{ repeat: Infinity, repeatDelay: 2, duration: 1 }}
-                    className="inline-block mr-2"
+              <motion.div 
+                className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-3xl"
+                animate={{ 
+                  x: [0, -30, 0], 
+                  y: [0, -40, 0],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{ 
+                  repeat: Infinity, 
+                  duration: 10, 
+                  ease: "easeInOut" 
+                }}
+              />
+              
+              <h3 className="text-3xl font-bold text-white mb-6 relative z-10">
+                <TypewriterText 
+                  text="Bereit, etwas zu verändern?" 
+                  delay={0.4}
+                  speed={0.05}
+                  className="relative"
+                />
+              </h3>
+              <motion.p 
+                className="text-lg text-white/90 mb-8 max-w-2xl mx-auto relative z-10"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                viewport={{ once: true }}
+              >
+                Schließe dich tausenden Athleten, Trainern und Sportprofis an, 
+                die daran arbeiten, sexualisierte Gewalt aus dem Sport zu eliminieren.
+              </motion.p>
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 justify-center relative z-10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5, duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    onClick={() => navigate('/test')}
+                    size="lg"
+                    className="text-lg px-8 bg-[#fcc424] hover:bg-[#fcc424]/90 active:bg-[#e5b120] text-black transition-all duration-200 shadow-lg"
                   >
-                    <Play className="h-5 w-5 inline-block" />
-                  </motion.span>
-                  Test starten
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button
-                  onClick={() => navigate('/story')}
-                  variant="outline"
-                  size="lg"
-                  className="text-lg px-8 text-white border-white bg-transparent hover:bg-white/10 active:bg-white/20 transition-all duration-200 shadow-lg"
-                >
-                  Mehr erfahren
-                  <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, repeatDelay: 2.5, duration: 1.2 }}
-                    className="inline-block ml-2"
+                    <motion.span
+                      animate={{ x: [0, 3, 0] }}
+                      transition={{ repeat: Infinity, repeatDelay: 2, duration: 1 }}
+                      className="inline-block mr-2"
+                    >
+                      <Play className="h-5 w-5 inline-block" />
+                    </motion.span>
+                    Test starten
+                  </Button>
+                </motion.div>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button
+                    onClick={() => navigate('/story')}
+                    variant="outline"
+                    size="lg"
+                    className="text-lg px-8 text-white border-white bg-transparent hover:bg-white/10 active:bg-white/20 transition-all duration-200 shadow-lg"
                   >
-                    <ChevronDown className="h-5 w-5 inline-block" />
-                  </motion.span>
-                </Button>
+                    Mehr erfahren
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ repeat: Infinity, repeatDelay: 2.5, duration: 1.2 }}
+                      className="inline-block ml-2"
+                    >
+                      <ChevronDown className="h-5 w-5 inline-block" />
+                    </motion.span>
+                  </Button>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>

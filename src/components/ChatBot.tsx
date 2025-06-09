@@ -7,10 +7,9 @@ import remarkGfm from 'remark-gfm';
 interface Message {
   role: 'assistant' | 'user';
   content: string;
-  animated?: boolean; // Flag für bereits animierte Nachrichten
+  animated?: boolean; 
 }
 
-// Schreibmaschineneffekt-Komponente
 const TypewriterEffect: React.FC<{ content: string; onComplete?: () => void; className?: string }> = ({ 
   content, 
   onComplete,
@@ -23,7 +22,7 @@ const TypewriterEffect: React.FC<{ content: string; onComplete?: () => void; cla
   const inView = useInView(ref);
   const markdownRef = useRef<HTMLDivElement>(null);
   
-  // Starte die Animation, wenn das Element sichtbar ist
+
   useEffect(() => {
     if (!inView) return;
     
@@ -31,7 +30,7 @@ const TypewriterEffect: React.FC<{ content: string; onComplete?: () => void; cla
       intervalRef.current = setInterval(() => {
         setDisplayedContent(prev => prev + content[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 15); // Geschwindigkeit des Schreibens
+      }, 15); // bmp beim Schreiben
     } else if (onComplete) {
       onComplete();
     }
@@ -72,6 +71,16 @@ const ChatBot = () => {
   const [activeAnimation, setActiveAnimation] = useState(false);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
+  // Listen for bottom navigation toggle event
+  useEffect(() => {
+    const handleToggleChatBot = () => {
+      setIsOpen(prev => !prev);
+    };
+
+    window.addEventListener('toggleChatBot', handleToggleChatBot);
+    return () => window.removeEventListener('toggleChatBot', handleToggleChatBot);
+  }, []);
+
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -80,11 +89,11 @@ const ChatBot = () => {
 
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
-    if (activeAnimation) return; // Verhindert Senden während einer laufenden Animation
+    if (activeAnimation) return; 
 
     setInputMessage('');
     setIsLoading(true);
-    setActiveAnimation(false); // Reset animation state
+    setActiveAnimation(false); 
     
     const newUserMessage = { role: 'user' as const, content: inputMessage, animated: true };
     const updatedMessages = [...messages, newUserMessage];
@@ -112,7 +121,7 @@ Du musst folgende Regeln IMMER beachten:
 
 ### Über die Kampagne WATCH. ACT. PROTECT.
 - Ziel: Sensibilisierung für sexualisierte Gewalt im Sport und Handlungsmöglichkeiten aufzeigen
-- Drei Kernbotschaften: WATCH (Erkenne es), ACT (Handele), PROTECT (Schütze)
+- Drei Kernbotschaften: WATCH (Erkenne), ACT (Handele), PROTECT (Schütze)
 - Zielgruppen: Sportler*innen, Trainer*innen, Vereinsmitarbeiter*innen, Eltern, Sportverbände
 - Farbkonzept: Orange (#dd4d22), Gelb (#fcc424), Türkisgrün (#1e8b88)
 - Dreistufiger Test zur Selbsteinschätzung: Level 1 (Grundlagen), Level 2 (Fortgeschritten), Level 3 (Experte)
@@ -142,18 +151,16 @@ Du musst folgende Regeln IMMER beachten:
         }
       );
       
-      // Get assistant response with animation flag
       const assistantMessage = { 
         role: 'assistant' as const, 
         content: response.data.choices[0].message.content,
-        animated: true // Dieses Flag markiert, dass die Nachricht animiert werden soll
+        animated: true 
       };
       setMessages(prev => [...prev, assistantMessage]);
-      setActiveAnimation(true); // Aktiviere Animation-Status
+      setActiveAnimation(true); 
     } catch (error: any) {
       console.error('Error calling Deepseek API:', error);
       
-      // Log detailed error information
       if (error.response) {
         // Server responded with a status code outside the 2xx range
         console.error('Error data:', error.response.data);
@@ -179,25 +186,8 @@ Du musst folgende Regeln IMMER beachten:
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      {/* Chat Button */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="bg-[#dd4d22] text-white p-3 sm:p-4 rounded-full shadow-lg hover:bg-[#dd4d22]/90 transition-all"
-        aria-label={isOpen ? "Chat schließen" : "Chat öffnen"}
-      >
-        {isOpen ? (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-          </svg>
-        )}
-      </motion.button>
+    <div className="fixed bottom-4 right-4 z-[60]">
+      {/* Chat Button - VERSTECKT, wird nur über Bottom Navigation geöffnet */}
 
       {/* Chat Window */}
       <AnimatePresence>
@@ -207,7 +197,14 @@ Du musst folgende Regeln IMMER beachten:
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-16 right-0 sm:w-96 w-[calc(100vw-24px)] max-h-[70vh] sm:h-[500px] h-[400px] bg-white rounded-lg shadow-xl flex flex-col overflow-hidden border border-[#dd4d22]"
+            className="fixed bottom-28 right-4 sm:w-96 w-[calc(100vw-32px)] max-h-[calc(100vh-200px)] sm:h-[500px] h-[400px] bg-white rounded-lg shadow-xl flex flex-col overflow-hidden border border-[#dd4d22]"
+            style={{ 
+              touchAction: 'manipulation', 
+              userSelect: 'none', 
+              WebkitTapHighlightColor: 'transparent',
+              position: 'fixed',
+              zIndex: 70
+            }}
           >
             {/* Chat Header */}
             <div className="p-3 sm:p-4 bg-gradient-to-r from-[#fcc424] via-[#dd4d22] to-[#1e8b88] text-white flex justify-between items-center">
@@ -364,9 +361,19 @@ Du musst folgende Regeln IMMER beachten:
                       handleSendMessage();
                     }
                   }}
-                  className="flex-1 border border-gray-300 rounded-full py-1.5 sm:py-2 px-3 sm:px-4 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#dd4d22] focus:border-transparent"
+                  className="flex-1 border border-gray-300 rounded-full py-1.5 sm:py-2 px-3 sm:px-4 text-base focus:outline-none focus:ring-2 focus:ring-[#dd4d22] focus:border-transparent"
                   placeholder="Schreibe eine Nachricht..."
                   disabled={isLoading}
+                  style={{ 
+                    fontSize: '16px', 
+                    touchAction: 'manipulation',
+                    transformOrigin: 'center',
+                    WebkitAppearance: 'none'
+                  }}
+                  onFocus={(e) => {
+                    // Verhindere iOS Zoom beim Focus
+                    e.target.style.transform = 'scale(1)';
+                  }}
                 />
                 <motion.button
                   onClick={handleSendMessage}

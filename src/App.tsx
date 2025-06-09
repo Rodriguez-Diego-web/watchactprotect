@@ -1,8 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import LoadingSpinner from './components/ui/LoadingSpinner';
 import ChatBot from './components/ChatBot';
+import PWAUpdatePrompt from './components/PWAUpdatePrompt';
+import NetworkStatusBanner from './components/NetworkStatusBanner';
+import BottomNavigationWrapper from './components/navigation/BottomNavigationWrapper';
+import OnboardingOverlay from './components/OnboardingOverlay';
+import LoadingAnimation from './components/LoadingAnimation';
+import { MenuProvider } from './contexts/MenuContext';
 
 // Lazy load route components for performance
 const LandingPage = lazy(() => import('./pages/LandingPage'));
@@ -15,8 +21,42 @@ const WidgetApp = lazy(() => import('./pages/WidgetApp'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 function App() {
+  const [showLoading, setShowLoading] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  useEffect(() => {
+    // Check if this is first visit
+    const hasVisited = localStorage.getItem('hasVisited');
+    const onboardingCompleted = localStorage.getItem('onboardingCompleted');
+    
+    if (!hasVisited) {
+      // First time visitor - show loading then onboarding
+      localStorage.setItem('hasVisited', 'true');
+    } else {
+      // Returning visitor - just show loading briefly
+      setTimeout(() => setShowLoading(false), 1500);
+    }
+
+    if (!onboardingCompleted && hasVisited) {
+      // Don't show onboarding until loading is done
+    }
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setShowLoading(false);
+    const onboardingCompleted = localStorage.getItem('onboardingCompleted');
+    if (!onboardingCompleted) {
+      setShowOnboarding(true);
+    }
+  };
+
+  const handleOnboardingClose = () => {
+    localStorage.setItem('onboardingCompleted', 'true');
+    setShowOnboarding(false);
+  };
+
   return (
-    <>
+    <MenuProvider>
       <Helmet>
         <title>SPOT IT. STOP IT. - Campaign Against Sexualised Violence in Sport</title>
         <meta name="description" content="An interactive campaign helping athletes of all ages identify and counteract sexualised violence in sport." />
@@ -31,6 +71,7 @@ function App() {
       </Helmet>
       
       <div className="min-h-screen bg-background">
+        <NetworkStatusBanner />
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -44,8 +85,20 @@ function App() {
           </Routes>
         </Suspense>
         <ChatBot />
+        <BottomNavigationWrapper />
+        <PWAUpdatePrompt />
+        
+        {/* Loading Animation */}
+        {showLoading && (
+          <LoadingAnimation onComplete={handleLoadingComplete} />
+        )}
+        
+        {/* Onboarding Overlay */}
+        {showOnboarding && (
+          <OnboardingOverlay onClose={handleOnboardingClose} />
+        )}
       </div>
-    </>
+    </MenuProvider>
   );
 }
 

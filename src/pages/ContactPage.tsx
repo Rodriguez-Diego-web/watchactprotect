@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import AnimatedMenuIcon from '@/components/ui/AnimatedMenuIcon';
 import NewLogo from '@/assets/logo.png';
 import { useState } from 'react';
+import { useMenu } from '@/contexts/MenuContext';
 
 const ContactPage = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isMenuOpen, setIsMenuOpen } = useMenu();
 
   return (
     <>
@@ -18,7 +19,7 @@ const ContactPage = () => {
       </Helmet>
 
       {/* Header with Logo and Navigation Menu */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 flex justify-between items-center shadow-md">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white p-4 flex justify-between items-center shadow-md" style={{ paddingTop: `calc(1rem + env(safe-area-inset-top, 0px))` }}>
         <img src={NewLogo} alt="Watch Act Protect Logo" className="h-14 md:h-16" /> {/* Logo on the left */}
         
         {/* Navigation Menu Button */}  

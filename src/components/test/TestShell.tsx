@@ -26,15 +26,14 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
     answerQuestion,
     completeTest,
     loadQuestions,
-    isLoadingQuestions, // Added for loading state
-    errorLoadingQuestions, // Added for error state
-    currentPhase // Added to know which phase is active or to select one
+    isLoadingQuestions, 
+    errorLoadingQuestions, 
+    currentPhase 
   } = useTestStore();
 
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   useEffect(() => {
-    // Only call loadQuestions if allQuestions is empty to avoid redundant fetches
     if (useTestStore.getState().allQuestions.length === 0) {
       loadQuestions();
     }
@@ -52,7 +51,6 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
   const canGoNext = selectedOption !== '';
   const canGoPrevious = currentQuestionIndex > 0;
 
-  // Find existing answer for current question
   useEffect(() => {
     const existingAnswer = answers.find(
       (answer) => answer.questionId === currentQuestion?.id
@@ -70,7 +68,7 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
       answerQuestion({
         questionId: currentQuestion.id,
         selectedOptionId: optionId,
-        score: selectedOptionData.score || 0, // Provide default for score
+        score: selectedOptionData.score || 0,
       });
     }
   };
@@ -87,7 +85,6 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
     previousQuestion();
   };
 
-    // Handle loading and error states first
   if (isLoadingQuestions) {
     return <div className="text-center p-10">Fragen werden geladen...</div>;
   }
@@ -96,13 +93,11 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
     return <div className="text-center p-10 text-red-600">Fehler beim Laden der Fragen: {errorLoadingQuestions}</div>;
   }
 
-  // Wenn der Test nicht gestartet ist, zeigen wir die Level-Auswahl
   if (!isTestStarted) {
     if (isLoadingQuestions) {
       return <div className="text-center p-10">Fragen werden geladen...</div>;
     }
     
-    // Zeige die neu gestaltete Level-Auswahl
     return (
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -182,22 +177,18 @@ const TestShell = ({ embedded = false }: TestShellProps) => {
     );
   }
 
-    // This check might be redundant if isLoadingQuestions is handled, 
-  // but good as a fallback if questions array is empty for the started phase.
   if (!currentQuestion && isTestStarted) {
     return <div className="text-center p-10">Keine Fragen für diesen Testabschnitt verfügbar oder Test nicht korrekt gestartet.</div>;
   }
-  // If test is not started, the start screen is shown above. If currentQuestion is null but test *is* started, it means an issue.
-  // If currentQuestion is null and test is NOT started, it's fine, the start screen handles it.
+ 
   if (!currentQuestion && !isTestStarted) {
-      // This case should ideally be caught by the !isTestStarted block above which returns the start button.
-      // If somehow reached, it means questions might not be loaded yet or no phase selected.
+      
       return <div className="text-center p-10">Test initialisieren...</div>;
   }
-  // Ensure currentQuestion is not null before proceeding to render the test UI
+  
   if (!currentQuestion) {
-    // This should ideally not be reached if the above conditions are met.
-    // It's a safeguard.
+    
+    
     return <div className="text-center p-10">Ein unerwarteter Fehler ist aufgetreten. Aktuelle Frage nicht gefunden.</div>;
   }
 
